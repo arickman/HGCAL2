@@ -1,0 +1,45 @@
+##############################
+## git tag history
+## Questions to Anne-Marie Magnan (IC London)
+##############################
+
+#####################
+## For branch master
+#####################
+* Add TB version 101 with 0 air gap for study of impact on even-odd layer structure.
+
+
+
+V06a-03-05
+----------
+* add energy per 3*3 region in SignalRegion output tree.
+* add missing analysis config files for mip studies.
+* fix digi for model 4
+
+V06a-03-04
+----------
+* add missing analysis macros to plot time info (cells above 60fC for pions for descop document).
+* DetectorConstruction: change cracks to be shifted layer-to-layer.
+* PrimaryGeneratorAction: do X-Y scan between -1.5-1.5cm for model 3 (for Jack).
+
+V06-03-04
+----------
+* Fix model4 with cracks, using integer staging, crack positions shifted by blocks of 10 - 10 - 8.
+* userlib: add vertex position, fix choice of si layer thickness and cell size to vary only for model 2, but be taken from steering parameters for other models.
+
+V06-02-04
+----------
+* DetectorConstruction: add testbeam version 100, and model 4 with transverse cracks. Reorganise code to have sectors and intersectors.
+* userlib: correct BHCAL mip weight (was still using 9mm scintillator).
+
+V05-02-04
+----------
+* add analysis/macros/Descop macros for descoping studies
+* DetectorConstruction: correct v6 geometry, using rounded absorber width and properly staging from 28 to 24 and 18 layers, add full descoped detector versions: v_HGCAL_v624=v38 and v_HGCAL_v618=v39.
+* PrimaryGeneratorAction: do gaussian z vertex smearing and random choice of phi angle only for full detector model=2.
+* userlib: add new versions in HGCSSDetector and submitDigi.sh
+
+
+
+
+

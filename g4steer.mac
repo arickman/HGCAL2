@@ -1,0 +1,10 @@
+/control/verbose 0
+/control/saveHistory
+/run/verbose 0
+/event/verbose 0
+/tracking/verbose 0
+/N03/det/setModel 2
+/filemode/inputFilename /data/cmszfs1/user/hiltbran/standalone_sim/PFCalEE/neutron_events/myFile.lhe
+/random/setSeeds 94130 21993
+/run/initialize
+/run/beamOn 10

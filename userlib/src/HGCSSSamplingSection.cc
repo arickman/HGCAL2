@@ -1,0 +1,3 @@
+#include "HGCSSSamplingSection.hh"
+
+//dummy
