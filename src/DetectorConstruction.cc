@@ -633,7 +633,7 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 			solid4 = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
 			solid5 = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
 			solid6 = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
-			solid7 = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
+			solid7 = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, 10*a, b, c);
 	//	}
 	//}
 	return solid;
