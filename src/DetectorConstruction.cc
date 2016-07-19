@@ -603,8 +603,8 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 	G4VSolid *solid;
 
 	if (which_ele == 0) {
-		solid = new G4Box(baseName + "box", width / 2, m_CalorSizeXY / 2,
-				thick / 2);
+		solid = new G4Box(baseName + "box", width / 2, m_CalorSizeXY / 2, thick / 2);
+			//solid = new G4Polyhedra(baseName + "hexagon", 0, 360, 6, 2, -50, {-12,12}, {0,0}, {24,24});
 		//set the offset!
 		if (baseName == "W1"){
 			m_z0pos = zpos;
@@ -613,13 +613,14 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 		if (model_ == DetectorConstruction::m_FULLSECTION) {
 			double layerR = tan(m_maxTheta) * (zpos - m_z0pos);
 			std::cout << "The radius for this layer is " << layerR << std::endl;
-			solid = new G4Tubs(baseName + "box", 0, layerR, thick / 2, minL,
-					width);
+		solid = new G4Tubs(baseName + "box", 0, layerR, thick / 2, minL,width);
+			//solid = new G4Polyhedra(baseName + "hexagon", 0, 360, 6, 2, -50, {-12,12}, {0,0}, {24,24});
 		}
 
 		else {
-			solid = new G4Box(baseName + "box", width / 2, m_CalorSizeXY / 2,
-					thick / 2);
+			//solid = new G4Box(baseName + "box", width / 2, m_CalorSizeXY / 2, thick / 2);
+			G4double a[2] = {0,5},b[2] = {0,0},c[2] = {20,20};
+			solid = new G4Polyhedra(baseName + "box", 0, 2*pi, 6, 2, -50, {-12,12}, {0,0}, {24,24});
 		}
 	}
 	return solid;
