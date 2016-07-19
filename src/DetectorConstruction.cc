@@ -626,14 +626,14 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 
 		else {
 			*/ //solid = new G4Box(baseName + "box", width / 2, m_CalorSizeXY / 2, thick / 2);
-			G4double a[2] = {0,5},b[2] = {0,0},c[2] = {20,20}, d[2] = {0, 500};
+			G4double a[2] = {0,5},b[2] = {0,0},c[2] = {20,20}, d[2] = {500, 500};
 			solid = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
 			solid2 = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
 			solid3 = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
 			solid4 = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
 			solid5 = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
 			solid6 = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
-			solid7 = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, d, d, d);
+			solid7 = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, d);
 	//	}
 	//}
 	return solid;
