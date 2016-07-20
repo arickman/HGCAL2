@@ -604,6 +604,7 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 		G4double thick, G4double zpos, const G4double & minL,
 		const G4double & width, size_t which_ele) {
 	G4VSolid *solid;
+	G4VSolid *Box;
 
 
 	/*if (which_ele == 0) {
@@ -626,7 +627,7 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 	int worldX = 500;
 	int worldY = 500;
 	int worldZ = 500;
-	string selectedMaterial = "Si";
+	G4Material* selectedMaterial = "Si";
 	int caloZ = 0;
 	int caloOffset = 1;
 	int firstCaloPos = 0;
@@ -643,8 +644,8 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 
 
 	// Define world volume
-	   G4Box* WorldBox = new G4Box( "WBox", worldX/2., worldY/2., worldZ/2. );
-	   G4LogicalVolume*   worldLV  = new G4LogicalVolume( WorldBox, selectedMaterial, "WLog", pFieldMgr, pSDetector, pULimits, true);
+	   Box = new G4Box( "WBox", worldX/2., worldY/2., worldZ/2. );
+	   G4LogicalVolume*   worldLV  = new G4LogicalVolume( Box, selectedMaterial, "WLog", pFieldMgr, pSDetector, pULimits, true);
 	   G4VPhysicalVolume* worldVol = new G4PVPlacement(0, G4ThreeVector(), "WPhys",worldLV, 0, false, 0);
 
 			//define our solid
