@@ -664,9 +664,6 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 			G4RotationMatrix Rm;
 
 			 // Fill the assembly by the hexagons
-			Ta.setX( 0. ); Ta.setY( 0. ); Ta.setZ( 0. );
-			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
 
 			Ta.setX( 18. ); Ta.setY( -1*6*1.73 ); Ta.setZ( 0. );
 			Tr = G4Transform3D(Ra,Ta);
@@ -692,6 +689,10 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 			Tr = G4Transform3D(Ra,Ta);
 			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
 
+			Ta.setX( 0. ); Ta.setY( 0. ); Ta.setZ( 0. );
+			Tr = G4Transform3D(Ra,Ta);
+			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+
 			   // Now instantiate the layers
 			   for( unsigned int i = 0; i < layers; i++ )
 			   {
@@ -701,8 +702,8 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 			     assemblyDetector->MakeImprint( worldLV, Tr, 0, false );
 			   }
 
-			   int tester = assemblyDetector->GetImprintsCount();
-			   cout << "number of imprints: "<< tester << endl;
+			   //int tester = assemblyDetector->GetImprintsCount();
+			   //cout << "number of imprints: "<< tester << endl;
 
 
 	//}
