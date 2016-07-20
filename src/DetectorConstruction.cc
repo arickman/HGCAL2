@@ -630,6 +630,7 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 	int caloZ = 0;
 	int caloOffset = 1;
 	int firstCaloPos = 0;
+	int layers = 500;
 
 
 	// Define world volume
@@ -640,7 +641,7 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 			//define our solid
 			G4double a[2] = {0,5},b[2] = {0,0},c[2] = {24,24};
 			solid = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
-			G4LogicalVolume* hexagonLV = new G4LogicalVolume( hexaBox, Si, "hexagonLV", 0, 0, 0 );
+			G4LogicalVolume* hexagonLV = new G4LogicalVolume( solid, Si, "hexagonLV", 0, 0, 0, true );
 
 			// Define one layer as one assembly volume
 			G4AssemblyVolume* assemblyDetector = new G4AssemblyVolume();
