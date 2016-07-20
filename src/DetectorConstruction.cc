@@ -647,7 +647,7 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 			//define our solid
 			G4double a[2] = {0,5},b[2] = {0,0},c[2] = {24,24};
 			solid = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
-			G4LogicalVolume* hexagonLV = new G4LogicalVolume( solid, Si, "hexagonLV", 0, 0, 0, true );
+			//G4LogicalVolume* hexagonLV = new G4LogicalVolume( solid, Si, "hexagonLV", 0, 0, 0, true );
 
 			// Define one layer as one assembly volume
 			G4AssemblyVolume* assemblyDetector = new G4AssemblyVolume();
@@ -663,31 +663,31 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 			 // Fill the assembly by the plates
 			Ta.setX( 0. ); Ta.setY( 0. ); Ta.setZ( 0. );
 			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+			assemblyDetector->AddPlacedVolume( worldVol, Tr );
 
 			Ta.setX( 18. ); Ta.setY( -1*6*1.73 ); Ta.setZ( 0. );
 			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+			assemblyDetector->AddPlacedVolume( worldVol, Tr );
 
 			Ta.setX( -18. ); Ta.setY( -1*6*1.73 ); Ta.setZ( 0. );
 			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+			assemblyDetector->AddPlacedVolume( worldVol, Tr );
 
 			Ta.setX( -18. ); Ta.setY( 6*1.73 ); Ta.setZ( 0. );
 			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+			assemblyDetector->AddPlacedVolume( worldVol, Tr );
 
 			Ta.setX( 18. ); Ta.setY( 6*1.73 ); Ta.setZ( 0. );
 			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+			assemblyDetector->AddPlacedVolume( worldVol, Tr );
 
 			Ta.setX( 0. ); Ta.setY( 12. ); Ta.setZ( 0. );
 			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+			assemblyDetector->AddPlacedVolume( worldVol, Tr );
 
 			Ta.setX( 0. ); Ta.setY( -1*12. ); Ta.setZ( 0. );
 			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+			assemblyDetector->AddPlacedVolume( worldVol, Tr );
 
 			   // Now instantiate the layers
 			   for( unsigned int i = 0; i < layers; i++ )
