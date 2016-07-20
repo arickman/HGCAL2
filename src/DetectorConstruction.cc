@@ -636,7 +636,7 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 	G4double z, amu, density;
 	  density = 2.329*g/cm3;
 	  amu = 28.0855*g/mole;
-	G4Material* Si = new G4Material(name="liquidArgon", z=14., amu, density);
+	G4Material* Si = new G4Material("Silicon", z=14., amu, density);
 
 
 	// Define world volume
