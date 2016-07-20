@@ -652,7 +652,7 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 			solid = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
 			G4LogicalVolume* hexagonLV = new G4LogicalVolume( solid, Si, "hexagonLV", pFieldMgr, pSDetector, pULimits, true );
 
-			/* // Define one layer as one assembly volume
+			 // Define one layer as one assembly volume
 			G4AssemblyVolume* assemblyDetector = new G4AssemblyVolume();
 
 			// Rotation and translation of a plate inside the assembly
@@ -663,7 +663,7 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 			// Rotation of the assembly inside the world
 			G4RotationMatrix Rm;
 
-			 // Fill the assembly by the plates
+			 // Fill the assembly by the hexagons
 			Ta.setX( 0. ); Ta.setY( 0. ); Ta.setZ( 0. );
 			Tr = G4Transform3D(Ra,Ta);
 			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
@@ -698,9 +698,8 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 			     // Translation of the assembly inside the world
 			     G4ThreeVector Tm( 0,0,i*(caloZ + caloOffset) - firstCaloPos );
 			     Tr = G4Transform3D(Rm,Tm);
-			     assemblyDetector->MakeImprint( worldLV, Tr );
+			     assemblyDetector->MakeImprint( worldLV, Tr, 0, false );
 			   }
-*/
 
 
 	//}
