@@ -24,6 +24,9 @@
 #include "G4FieldManager.hh"
 #include "G4TransportationManager.hh"
 #include "G4PhysicalConstants.hh"
+#include "G4AssemblyVolume.hh"
+#include "G4Transform3D.hh"
+
 
 using namespace std;
 
@@ -601,12 +604,6 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 		G4double thick, G4double zpos, const G4double & minL,
 		const G4double & width, size_t which_ele) {
 	G4VSolid *solid;
-	G4VSolid *solid2;
-	G4VSolid *solid3;
-	G4VSolid *solid4;
-	G4VSolid *solid5;
-	G4VSolid *solid6;
-	G4VSolid *solid7;
 
 
 	/*if (which_ele == 0) {
@@ -626,15 +623,76 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 
 		else {
 			*/ //solid = new G4Box(baseName + "box", width / 2, m_CalorSizeXY / 2, thick / 2);
-			G4double a[2] = {0,5},b[2] = {0,0},c[2] = {20,20};
-			//solid = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
-			solid2 = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
-			//solid3 = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
-			//solid4 = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
-			//solid5 = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
-			//solid6 = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
-			//solid7 = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
-	//	}
+	int worldX = 500;
+	int worldY = 500;
+	int worldZ = 500;
+	string selectedMaterial = Si;
+	int caloZ = 0;
+	int caloOffset = 1;
+	int firstCaloPos = 0;
+
+
+	// Define world volume
+	   G4Box* WorldBox = new G4Box( "WBox", worldX/2., worldY/2., worldZ/2. );
+	   G4LogicalVolume*   worldLV  = new G4LogicalVolume( WorldBox, selectedMaterial, "WLog", 0, 0, 0);
+	   G4VPhysicalVolume* worldVol = new G4PVPlacement(0, G4ThreeVector(), "WPhys",worldLV, 0, false, 0);
+
+			//define our solid
+			G4double a[2] = {0,5},b[2] = {0,0},c[2] = {24,24};
+			solid = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
+			G4LogicalVolume* hexagonLV = new G4LogicalVolume( hexaBox, Si, "hexagonLV", 0, 0, 0 );
+
+			// Define one layer as one assembly volume
+			G4AssemblyVolume* assemblyDetector = new G4AssemblyVolume();
+
+			// Rotation and translation of a plate inside the assembly
+			G4RotationMatrix Ra;
+			G4ThreeVector Ta;
+			G4Transform3D Tr;
+
+			// Rotation of the assembly inside the world
+			G4RotationMatrix Rm;
+
+			 // Fill the assembly by the plates
+			Ta.setX( 0. ); Ta.setY( 0. ); Ta.setZ( 0. );
+			Tr = G4Transform3D(Ra,Ta);
+			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+
+			Ta.setX( 18. ); Ta.setY( -1*6*1.73 ); Ta.setZ( 0. );
+			Tr = G4Transform3D(Ra,Ta);
+			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+
+			Ta.setX( -18. ); Ta.setY( -1*6*1.73 ); Ta.setZ( 0. );
+			Tr = G4Transform3D(Ra,Ta);
+			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+
+			Ta.setX( -18. ); Ta.setY( 6*1.73 ); Ta.setZ( 0. );
+			Tr = G4Transform3D(Ra,Ta);
+			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+
+			Ta.setX( 18. ); Ta.setY( 6*1.73 ); Ta.setZ( 0. );
+			Tr = G4Transform3D(Ra,Ta);
+			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+
+			Ta.setX( 0. ); Ta.setY( 12. ); Ta.setZ( 0. );
+			Tr = G4Transform3D(Ra,Ta);
+			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+
+			Ta.setX( 0. ); Ta.setY( -1*12. ); Ta.setZ( 0. );
+			Tr = G4Transform3D(Ra,Ta);
+			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+
+			   // Now instantiate the layers
+			   for( unsigned int i = 0; i < layers; i++ )
+			   {
+			     // Translation of the assembly inside the world
+			     G4ThreeVector Tm( 0,0,i*(caloZ + caloOffset) - firstCaloPos );
+			     Tr = G4Transform3D(Rm,Tm);
+			     assemblyDetector->MakeImprint( worldLV, Tr );
+			   }
+
+
+
 	//}
-	return solid2;
+	return solid;
 }
