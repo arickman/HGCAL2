@@ -696,7 +696,7 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 			   for( unsigned int i = 0; i < layers; i++ )
 			   {
 			     // Translation of the assembly inside the world
-			     G4ThreeVector Tm( 0,0,i*(caloZ + caloOffset) - firstCaloPos );
+			     G4ThreeVector Tm( 50,0,i*(caloZ + caloOffset) - firstCaloPos );
 			     Tr = G4Transform3D(Rm,Tm);
 			     assemblyDetector->MakeImprint( worldLV, Tr, 0, false );
 			   }
