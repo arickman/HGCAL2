@@ -624,9 +624,9 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 
 		else {
 			*/ //solid = new G4Box(baseName + "box", width / 2, m_CalorSizeXY / 2, thick / 2);
-	int worldX = 500;
-	int worldY = 500;
-	int worldZ = 500;
+	int worldX = 50000;
+	int worldY = 50000;
+	int worldZ = 50000;
 	int caloZ = 0;
 	int caloOffset = 1;
 	int firstCaloPos = 0;
