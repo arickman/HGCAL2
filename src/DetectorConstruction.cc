@@ -627,7 +627,6 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 	int worldX = 500;
 	int worldY = 500;
 	int worldZ = 500;
-	G4Material* selectedMaterial = "Si";
 	int caloZ = 0;
 	int caloOffset = 1;
 	int firstCaloPos = 0;
@@ -645,7 +644,7 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 
 	// Define world volume
 	   Box = new G4Box( "WBox", worldX/2., worldY/2., worldZ/2. );
-	   G4LogicalVolume*   worldLV  = new G4LogicalVolume( Box, selectedMaterial, "WLog", pFieldMgr, pSDetector, pULimits, true);
+	   G4LogicalVolume*   worldLV  = new G4LogicalVolume( Box, Si, "WLog", pFieldMgr, pSDetector, pULimits, true);
 	   G4VPhysicalVolume* worldVol = new G4PVPlacement(0, G4ThreeVector(), "WPhys",worldLV, 0, false, 0);
 
 			//define our solid
@@ -667,31 +666,31 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 			 // Fill the assembly by the plates
 			Ta.setX( 0. ); Ta.setY( 0. ); Ta.setZ( 0. );
 			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr, Ra );
+			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
 
 			Ta.setX( 18. ); Ta.setY( -1*6*1.73 ); Ta.setZ( 0. );
 			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr, Ra );
+			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
 
 			Ta.setX( -18. ); Ta.setY( -1*6*1.73 ); Ta.setZ( 0. );
 			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr, Ra );
+			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
 
 			Ta.setX( -18. ); Ta.setY( 6*1.73 ); Ta.setZ( 0. );
 			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr, Ra );
+			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
 
 			Ta.setX( 18. ); Ta.setY( 6*1.73 ); Ta.setZ( 0. );
 			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr, Ra );
+			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
 
 			Ta.setX( 0. ); Ta.setY( 12. ); Ta.setZ( 0. );
 			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr, Ra );
+			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
 
 			Ta.setX( 0. ); Ta.setY( -1*12. ); Ta.setZ( 0. );
 			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr, Ra );
+			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
 
 			   // Now instantiate the layers
 			   for( unsigned int i = 0; i < layers; i++ )
