@@ -701,7 +701,7 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 			     assemblyDetector->MakeImprint( worldLV, Tr, 0, false );
 			   }
 
-			   int tester = assembyDetector->GetImprintsCount();
+			   int tester = assemblyDetector->GetImprintsCount();
 			   cout << "number of imprints: "<< tester << endl;
 
 
