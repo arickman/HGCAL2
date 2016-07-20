@@ -633,6 +633,10 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 	int layers = 500;
 	G4NistManager* nistManager = G4NistManager::Instance();
 	m_materials["Si"] = nistManager->FindOrBuildMaterial("G4_Si", false);
+	G4double z, a, density;
+	  density = 2.329*g/cm3;
+	  a = 28.0855*g/mole;
+	G4Material* Si = new G4Material(name="liquidArgon", z=14., a, density);
 
 
 	// Define world volume
@@ -643,7 +647,7 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 			//define our solid
 			G4double a[2] = {0,5},b[2] = {0,0},c[2] = {24,24};
 			solid = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
-			G4LogicalVolume* hexagonLV = new G4LogicalVolume( solid, "Si", "hexagonLV", 0, 0, 0, true );
+			G4LogicalVolume* hexagonLV = new G4LogicalVolume( solid, Si, "hexagonLV", 0, 0, 0, true );
 
 			// Define one layer as one assembly volume
 			G4AssemblyVolume* assemblyDetector = new G4AssemblyVolume();
