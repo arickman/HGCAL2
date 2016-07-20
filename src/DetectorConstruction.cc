@@ -633,10 +633,10 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 	int layers = 500;
 	G4NistManager* nistManager = G4NistManager::Instance();
 	m_materials["Si"] = nistManager->FindOrBuildMaterial("G4_Si", false);
-	G4double z, a, density;
+	G4double z, amu, density;
 	  density = 2.329*g/cm3;
-	  a = 28.0855*g/mole;
-	G4Material* Si = new G4Material(name="liquidArgon", z=14., a, density);
+	  amu = 28.0855*g/mole;
+	G4Material* Si = new G4Material(name="liquidArgon", z=14., amu, density);
 
 
 	// Define world volume
