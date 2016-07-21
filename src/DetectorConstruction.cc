@@ -315,10 +315,10 @@ void DetectorConstruction::DefineMaterials() {
 
 }
 
-//
+
 void DetectorConstruction::UpdateCalorSize() {
 
-	/*m_CalorSizeZ = 0;
+	m_CalorSizeZ = 0;
 	G4double maxRadLen = 0;
 	for (size_t i = 0; i < m_caloStruct.size(); i++) {
 		m_CalorSizeZ = m_CalorSizeZ + m_caloStruct[i].Total_thick;
@@ -363,7 +363,6 @@ void DetectorConstruction::UpdateCalorSize() {
 	G4cout << "[DetectorConstruction][UpdateCalorSize] Z x XY = "
 			<< m_CalorSizeZ << " x " << m_CalorSizeXY << " mm "
 			<< ", nsectors = " << m_nSectors << G4endl;
-*/
 }
 
 G4VPhysicalVolume* DetectorConstruction::Construct() {
@@ -603,6 +602,11 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 	G4VSolid *solid;
 	G4VSolid *Box;
 
+	//clean old geometry
+		G4GeometryManager::GetInstance()->OpenGeometry();
+		G4PhysicalVolumeStore::GetInstance()->Clean();
+		G4LogicalVolumeStore::GetInstance()->Clean();
+		G4SolidStore::GetInstance()->Clean();
 
 	/*if (which_ele == 0) {
 		solid = new G4Box(baseName + "box", width / 2, m_CalorSizeXY / 2, thick / 2);
