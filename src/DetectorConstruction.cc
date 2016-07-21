@@ -180,7 +180,7 @@ void DetectorConstruction::buildECal(){
 
 }
 void DetectorConstruction::buildHCal(double steelThick){
-	/*std::vector<std::pair <G4double,std::string>> iEleL;
+	std::vector<std::pair <G4double,std::string>> iEleL;
 
 	if (version_ == H){
 		iEleL.push_back(make_pair(80*cm,"G4_Galactic"));
@@ -202,7 +202,6 @@ void DetectorConstruction::buildHCal(double steelThick){
 		for(unsigned i=0; i<Nmodule; i++) {
 			m_caloStruct.push_back( SamplingSection(iEleL) );
 		}
-	}*/
 }
 DetectorConstruction::~DetectorConstruction() {
 	delete m_detectorMessenger;
@@ -319,7 +318,7 @@ void DetectorConstruction::DefineMaterials() {
 //
 void DetectorConstruction::UpdateCalorSize() {
 
-	m_CalorSizeZ = 0;
+	/*m_CalorSizeZ = 0;
 	G4double maxRadLen = 0;
 	for (size_t i = 0; i < m_caloStruct.size(); i++) {
 		m_CalorSizeZ = m_CalorSizeZ + m_caloStruct[i].Total_thick;
@@ -364,10 +363,9 @@ void DetectorConstruction::UpdateCalorSize() {
 	G4cout << "[DetectorConstruction][UpdateCalorSize] Z x XY = "
 			<< m_CalorSizeZ << " x " << m_CalorSizeXY << " mm "
 			<< ", nsectors = " << m_nSectors << G4endl;
-
+*/
 }
 
-//
 G4VPhysicalVolume* DetectorConstruction::Construct() {
 
 	//clean old geometry
