@@ -36,7 +36,7 @@ DetectorConstruction::DetectorConstruction(G4int ver, G4int mod, double steelThi
 
 		G4cout << "[DetectorConstruction] starting v_HGCALSYM_v1" << G4endl;
 		buildTracker();
-		buildECal();
+		//buildECal();
 		buildHCal(steelThick);
 		//Add the target
 
@@ -493,6 +493,8 @@ void DetectorConstruction::buildSectorStack(const unsigned sectorNum,
 					int caloOffset = 1;
 					int firstCaloPos = 0;
 					int layers = 5;
+					G4NistManager* nistManager = G4NistManager::Instance();
+					m_materials["Si"] = nistManager->FindOrBuildMaterial("G4_Si", false);
 					G4double z, amu, density;
 					  density = 2.329*g/cm3;
 					  amu = 28.0855*g/mole;
@@ -509,7 +511,7 @@ void DetectorConstruction::buildSectorStack(const unsigned sectorNum,
 
 							//define our solid
 							G4double a[2] = {0,5},b[2] = {0,0},c[2] = {24,24};
-							solid = new G4Polyhedra("box", 0., 2* pi, 6, 2, a, b, c);
+							solid = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
 							G4LogicalVolume* hexagonLV = new G4LogicalVolume( solid, Si, "hexagonLV", pFieldMgr, pSDetector, pULimits, true );
 
 							 // Define one layer as one assembly volume
@@ -564,6 +566,7 @@ void DetectorConstruction::buildSectorStack(const unsigned sectorNum,
 							   	 //cout << "number of imprints: "<< tester << endl;
 
 							   }
+
 
 
 
