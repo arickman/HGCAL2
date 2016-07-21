@@ -630,7 +630,7 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 	int caloZ = 0;
 	int caloOffset = 1;
 	int firstCaloPos = 0;
-	int layers = 500;
+	int layers = 5;
 	G4NistManager* nistManager = G4NistManager::Instance();
 	m_materials["Si"] = nistManager->FindOrBuildMaterial("G4_Si", false);
 	G4double z, amu, density;
