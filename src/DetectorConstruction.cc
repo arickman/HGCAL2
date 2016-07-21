@@ -723,7 +723,7 @@ void DetectorConstruction::SetDetModel(G4int model) {
 	model_ = model;
 }
 
-G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
+ /* G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 		G4double thick, G4double zpos, const G4double & minL,
 		const G4double & width, size_t which_ele) {
 
@@ -747,7 +747,7 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 		}
 
 		else {
-			*/ //solid = new G4Box(baseName + "box", width / 2, m_CalorSizeXY / 2, thick / 2);
+			 //solid = new G4Box(baseName + "box", width / 2, m_CalorSizeXY / 2, thick / 2);
 	int worldX = 5000;
 	int worldY = 5000;
 	int worldZ = 5000;
