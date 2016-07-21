@@ -95,12 +95,12 @@ void DetectorConstruction::buildECal(){
 
 		std::vector<std::pair <G4double,std::string>> iEleL,iEleR;
 		initLayer(1);
-		if (version_ == HGCAL_E26_TH || version_ == HGCAL_E26_T || version_ == HGCAL_E26_H || version_ == HGCAL_E26){
+		/*if (version_ == HGCAL_E26_TH || version_ == HGCAL_E26_T || version_ == HGCAL_E26_H || version_ == HGCAL_E26){
 			G4double airThick = 2*mm,
 					pcbThick = 2*mm,
 					wThick = 2.*mm,
 					wcuThick = 0.6*mm;
-/*
+
 			iEleL.clear();
 			iEleL.push_back(make_pair(0.5*mm,"Cu"));
 			iEleL.push_back(make_pair(0.5*mm,"CFMix"));
@@ -177,9 +177,8 @@ void DetectorConstruction::buildECal(){
 				m_caloStruct.push_back( SamplingSection(iEleL) );
 			}
 		}
-
-}
 */
+}
 void DetectorConstruction::buildHCal(double steelThick){
 	std::vector<std::pair <G4double,std::string>> iEleL;
 
