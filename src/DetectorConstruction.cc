@@ -37,7 +37,7 @@ DetectorConstruction::DetectorConstruction(G4int ver, G4int mod, double steelThi
 
 		G4cout << "[DetectorConstruction] starting v_HGCALSYM_v1" << G4endl;
 		buildTracker();
-		buildECal();
+		buildECal(baseName);
 		buildHCal(steelThick);
 		//Add the target
 
@@ -91,7 +91,120 @@ void DetectorConstruction::buildTracker(){
 
 }
 
-void DetectorConstruction::buildECal(){
+void DetectorConstruction::buildECal(std::string baseName) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		G4VSolid *solid;
+		G4VSolid *Box;
+		int worldX = 5000;
+		int worldY = 5000;
+		int worldZ = 5000;
+		int caloZ = 0;
+		int caloOffset = 1;
+		int firstCaloPos = 0;
+		int layers = 5;
+		G4double z, amu, density;
+		density = 2.329*g/cm3;
+		amu = 28.0855*g/mole;
+		G4Material* Si = new G4Material("Silicon", z=14., amu, density);
+		G4FieldManager* pFieldMgr=0;
+		G4VSensitiveDetector* pSDetector=0;
+		G4UserLimits* pULimits=0;
+
+
+		// Define world volume
+		   Box = new G4Box( "WBox", worldX/2., worldY/2., worldZ/2. );
+		   G4LogicalVolume*   worldLV  = new G4LogicalVolume( Box, Si, "WLog", pFieldMgr, pSDetector, pULimits, true);
+		   G4VPhysicalVolume* worldVol = new G4PVPlacement(0, G4ThreeVector(), "WPhys",worldLV, 0, false, 0);
+
+				//define our solid
+				G4double a[2] = {0,5},b[2] = {0,0},c[2] = {24,24};
+				solid = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
+				G4LogicalVolume* hexagonLV = new G4LogicalVolume( solid, Si, "hexagonLV", pFieldMgr, pSDetector, pULimits, true );
+
+				 // Define one layer as one assembly volume
+				G4AssemblyVolume* assemblyDetector = new G4AssemblyVolume();
+
+				// Rotation and translation of a plate inside the assembly
+				G4RotationMatrix Ra;
+				G4ThreeVector Ta;
+				G4Transform3D Tr;
+
+				// Rotation of the assembly inside the world
+				G4RotationMatrix Rm;
+
+				 // Fill the assembly by the hexagons
+
+				Ta.setX( 18. ); Ta.setY( -1*6*1.73 ); Ta.setZ( 0. );
+				Tr = G4Transform3D(Ra,Ta);
+				assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+
+				Ta.setX( -18. ); Ta.setY( -1*6*1.73 ); Ta.setZ( 0. );
+				Tr = G4Transform3D(Ra,Ta);
+				assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+
+				Ta.setX( -18. ); Ta.setY( 6*1.73 ); Ta.setZ( 0. );
+				Tr = G4Transform3D(Ra,Ta);
+				assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+
+				Ta.setX( 18. ); Ta.setY( 6*1.73 ); Ta.setZ( 0. );
+				Tr = G4Transform3D(Ra,Ta);
+				assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+
+				Ta.setX( 0. ); Ta.setY( 12. ); Ta.setZ( 0. );
+				Tr = G4Transform3D(Ra,Ta);
+				assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+
+				Ta.setX( 0. ); Ta.setY( -1*12. ); Ta.setZ( 0. );
+				Tr = G4Transform3D(Ra,Ta);
+				assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+
+				Ta.setX( 0. ); Ta.setY( 0. ); Ta.setZ( 0. );
+				Tr = G4Transform3D(Ra,Ta);
+				assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+
+				   // Now instantiate the layers
+				   for( unsigned int i = 0; i < layers; i++ )
+				   {
+				     // Translation of the assembly inside the world
+				     G4ThreeVector Tm( 0,0,i*(caloZ + caloOffset) - firstCaloPos );
+				     Tr = G4Transform3D(Rm,Tm);
+				     assemblyDetector->MakeImprint( worldLV, Tr, 0, false );
+				   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		std::vector<std::pair <G4double,std::string>> iEleL,iEleR;
 		initLayer(1);
@@ -115,14 +228,14 @@ void DetectorConstruction::buildECal(){
 			iEleL.push_back(make_pair(0.1*mm,"Si"));
 
 			std::vector<std::pair <G4double,std::string>> iEleR;
-/*			iEleR.push_back(make_pair(wcuThick,"WCu"));
+			iEleR.push_back(make_pair(wcuThick,"WCu"));
 			iEleR.push_back(make_pair(6*mm,"Cu"));
 			iEleR.push_back(make_pair(wcuThick,"WCu"));
 			iEleR.push_back(make_pair(0.1*mm,"Si"));
 			iEleR.push_back(make_pair(0.1*mm,"Si"));
 			iEleR.push_back(make_pair(0.1*mm,"Si"));
 			iEleR.push_back(make_pair(pcbThick,"PCB"));
-*/			iEleR.push_back(make_pair(airThick,"Air"));
+			iEleR.push_back(make_pair(airThick,"Air"));
 
 				unsigned Nmodule=4;
 				for(unsigned i=0; i<Nmodule; i++) {
@@ -132,8 +245,8 @@ void DetectorConstruction::buildECal(){
 
 				Nmodule=5;
 				iEleL[2].first = 2.8*mm;
-//				iEleR[0].first = 1.2*mm;
-//				iEleR[2].first = 1.2*mm;
+				iEleR[0].first = 1.2*mm;
+				iEleR[2].first = 1.2*mm;
 				for(unsigned i=0; i<Nmodule; i++) {
 					m_caloStruct.push_back( SamplingSection(iEleL) );
 					m_caloStruct.push_back( SamplingSection(iEleR) );
@@ -141,8 +254,8 @@ void DetectorConstruction::buildECal(){
 
 				Nmodule=4;
 				iEleL[2].first = 4.2*mm;
-	//			iEleR[0].first = 2.2*mm;
-	//			iEleR[2].first = 2.2*mm;
+				iEleR[0].first = 2.2*mm;
+				iEleR[2].first = 2.2*mm;
 				for(unsigned i=0; i<Nmodule; i++) {
 					m_caloStruct.push_back( SamplingSection(iEleL) );
 					m_caloStruct.push_back( SamplingSection(iEleR) );
@@ -649,7 +762,7 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 
 			//define our solid
 			G4double a[2] = {0,5},b[2] = {0,0},c[2] = {24,24};
-			solid = new G4Polyhedra(baseName + "box", 0., 2* pi, 8, 2, a, b, c);
+			solid = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
 			G4LogicalVolume* hexagonLV = new G4LogicalVolume( solid, Si, "hexagonLV", pFieldMgr, pSDetector, pULimits, true );
 
 			 // Define one layer as one assembly volume

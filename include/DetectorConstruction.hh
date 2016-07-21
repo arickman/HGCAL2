@@ -138,7 +138,7 @@ private:
 	 */
 	void UpdateCalorSize();
 	void buildTracker();
-	void buildECal();
+	void buildECal(std::string baseName);
 	void buildHCal(double steelThick);
 
 	/**
