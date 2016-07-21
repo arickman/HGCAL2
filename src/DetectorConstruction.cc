@@ -517,7 +517,7 @@ void DetectorConstruction::buildECal(std::string baseName) {
 
 
 
-
+baseName = "name";
 
 
 
