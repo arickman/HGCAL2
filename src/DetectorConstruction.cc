@@ -45,7 +45,7 @@ DetectorConstruction::DetectorConstruction(G4int ver, G4int mod, double steelThi
 	DefineMaterials();
 	SetMagField(0);
 	m_detectorMessenger = new DetectorMessenger(this);
-	//UpdateCalorSize();
+	UpdateCalorSize();
 }
 void DetectorConstruction::buildTracker(){
 
@@ -92,6 +92,7 @@ void DetectorConstruction::buildTracker(){
 
 void DetectorConstruction::buildECal(){
 
+	/*
 		std::vector<std::pair <G4double,std::string>> iEleL,iEleR;
 		initLayer(1);
 		if (version_ == HGCAL_E26_TH || version_ == HGCAL_E26_T || version_ == HGCAL_E26_H || version_ == HGCAL_E26){
@@ -176,7 +177,7 @@ void DetectorConstruction::buildECal(){
 				m_caloStruct.push_back( SamplingSection(iEleL) );
 			}
 		}
-
+*/
 }
 
 void DetectorConstruction::buildHCal(double steelThick){
