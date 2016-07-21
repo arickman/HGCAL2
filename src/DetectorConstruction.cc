@@ -512,11 +512,9 @@ void DetectorConstruction::SetDetModel(G4int model) {
 	model_ = model;
 }
 
-void DetectorConstruction::buildECal(std::string baseName) {
+void DetectorConstruction::buildECal() {
 
 
-
-baseName = "name";
 
 
 
@@ -555,7 +553,7 @@ baseName = "name";
 
 				//define our solid
 				G4double a[2] = {0,5},b[2] = {0,0},c[2] = {24,24};
-				solid = new G4Polyhedra(baseName + "box", 0., 2* pi, 6, 2, a, b, c);
+				solid = new G4Polyhedra("box", 0., 2* pi, 6, 2, a, b, c);
 				G4LogicalVolume* hexagonLV = new G4LogicalVolume( solid, Si, "hexagonLV", pFieldMgr, pSDetector, pULimits, true );
 
 				 // Define one layer as one assembly volume
