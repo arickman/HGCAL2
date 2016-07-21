@@ -53,7 +53,7 @@ void DetectorConstruction::buildTracker(){
 		std::vector<std::pair <G4double,std::string>> iEleL;
 		initLayer(1);
 
-		if (version_ == HGCAL_E26_TH || version_ == HGCAL_E26_T || version_ == HGCAL_E40_TH || version_ == HGCAL_E40_T || version_ == T){
+		/* if (version_ == HGCAL_E26_TH || version_ == HGCAL_E26_T || version_ == HGCAL_E40_TH || version_ == HGCAL_E40_T || version_ == T){
 			for (int i = 0; i < 6; i ++){
 				iEleL.push_back(make_pair(.7*mm,"Si"));
 				iEleL.push_back(make_pair(99.3*mm,"G4_Galactic"));
@@ -89,7 +89,7 @@ void DetectorConstruction::buildTracker(){
 			iEleL.push_back(make_pair(20*cm,"G4_Galactic"));
 		}
 
-}
+*/}
 
 void DetectorConstruction::buildECal(){
 
