@@ -824,8 +824,8 @@ void DetectorConstruction::SetDetModel(G4int model) {
 			     G4ThreeVector Tm( 0,0,i*(caloZ + caloOffset) - firstCaloPos );
 			     Tr = G4Transform3D(Rm,Tm);
 			     assemblyDetector->MakeImprint( worldLV, Tr, 0, false );
-			     int tester = assemblyDetector->GetImprintsCount();
-			   	 cout << "number of imprints: "<< tester << endl;
+			    // int tester = assemblyDetector->GetImprintsCount();
+			   	 //cout << "number of imprints: "<< tester << endl;
 
 			   }
 
