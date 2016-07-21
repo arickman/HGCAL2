@@ -833,3 +833,4 @@ void DetectorConstruction::SetDetModel(G4int model) {
 	//}
 	return solid;
 }
+*/
