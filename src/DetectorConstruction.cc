@@ -666,40 +666,40 @@ G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 			 // Fill the assembly by the hexagons
 
 			Ta.setX( 18. ); Ta.setY( -1*6*1.73 ); Ta.setZ( 0. );
-			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+			//Tr = G4Transform3D(Ra,Ta);
+			assemblyDetector->AddPlacedVolume( hexagonLV, G4Transform3D(Ra,Ta) );
 
 			Ta.setX( -18. ); Ta.setY( -1*6*1.73 ); Ta.setZ( 0. );
-			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+			//Tr = G4Transform3D(Ra,Ta);
+			assemblyDetector->AddPlacedVolume( hexagonLV, G4Transform3D(Ra,Ta) );
 
 			Ta.setX( -18. ); Ta.setY( 6*1.73 ); Ta.setZ( 0. );
-			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+			//Tr = G4Transform3D(Ra,Ta);
+			assemblyDetector->AddPlacedVolume( hexagonLV, G4Transform3D(Ra,Ta) );
 
 			Ta.setX( 18. ); Ta.setY( 6*1.73 ); Ta.setZ( 0. );
-			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+			//Tr = G4Transform3D(Ra,Ta);
+			assemblyDetector->AddPlacedVolume( hexagonLV, G4Transform3D(Ra,Ta) );
 
 			Ta.setX( 0. ); Ta.setY( 12. ); Ta.setZ( 0. );
-			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+			//Tr = G4Transform3D(Ra,Ta);
+			assemblyDetector->AddPlacedVolume( hexagonLV, G4Transform3D(Ra,Ta) );
 
 			Ta.setX( 0. ); Ta.setY( -1*12. ); Ta.setZ( 0. );
-			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+			//Tr = G4Transform3D(Ra,Ta);
+			assemblyDetector->AddPlacedVolume( hexagonLV, G4Transform3D(Ra,Ta) );
 
 			Ta.setX( 0. ); Ta.setY( 0. ); Ta.setZ( 0. );
-			Tr = G4Transform3D(Ra,Ta);
-			assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
+			//Tr = G4Transform3D(Ra,Ta);
+			assemblyDetector->AddPlacedVolume( hexagonLV, G4Transform3D(Ra,Ta) );
 
 			   // Now instantiate the layers
 			   for( unsigned int i = 0; i < layers; i++ )
 			   {
 			     // Translation of the assembly inside the world
 			     G4ThreeVector Tm( 0,0,i*(caloZ + caloOffset) - firstCaloPos );
-			     Tr = G4Transform3D(Rm,Tm);
-			     assemblyDetector->MakeImprint( worldLV, Tr, 0, false );
+			     //Tr = G4Transform3D(Rm,Tm);
+			     assemblyDetector->MakeImprint( worldLV, G4Transform3D(Rm,Tm), 0, false );
 			   }
 
 			   //int tester = assemblyDetector->GetImprintsCount();
