@@ -37,7 +37,7 @@ DetectorConstruction::DetectorConstruction(G4int ver, G4int mod, double steelThi
 
 		G4cout << "[DetectorConstruction] starting v_HGCALSYM_v1" << G4endl;
 		buildTracker();
-		buildECal(baseName);
+		buildECal();
 		buildHCal(steelThick);
 		//Add the target
 
@@ -91,6 +91,94 @@ void DetectorConstruction::buildTracker(){
 
 }
 
+void DetectorConstruction::buildECal(){
+
+		std::vector<std::pair <G4double,std::string>> iEleL,iEleR;
+		initLayer(1);
+		if (version_ == HGCAL_E26_TH || version_ == HGCAL_E26_T || version_ == HGCAL_E26_H || version_ == HGCAL_E26){
+			G4double airThick = 2*mm,
+					pcbThick = 2*mm,
+					wThick = 2.*mm,
+					wcuThick = 0.6*mm;
+
+			iEleL.clear();
+			iEleL.push_back(make_pair(0.5*mm,"Cu"));
+			iEleL.push_back(make_pair(0.5*mm,"CFMix"));
+			iEleL.push_back(make_pair(wThick,"W"));
+
+			iEleL.push_back(make_pair(0.5*mm,"CFMix"));
+			iEleL.push_back(make_pair(0.5*mm,"Cu"));
+			iEleL.push_back(make_pair(airThick,"Air"));
+			iEleL.push_back(make_pair(pcbThick,"PCB"));
+			iEleL.push_back(make_pair(0.1*mm,"Si"));
+			iEleL.push_back(make_pair(0.1*mm,"Si"));
+			iEleL.push_back(make_pair(0.1*mm,"Si"));
+
+			std::vector<std::pair <G4double,std::string>> iEleR;
+			iEleR.push_back(make_pair(wcuThick,"WCu"));
+			iEleR.push_back(make_pair(6*mm,"Cu"));
+			iEleR.push_back(make_pair(wcuThick,"WCu"));
+			iEleR.push_back(make_pair(0.1*mm,"Si"));
+			iEleR.push_back(make_pair(0.1*mm,"Si"));
+			iEleR.push_back(make_pair(0.1*mm,"Si"));
+			iEleR.push_back(make_pair(pcbThick,"PCB"));
+			iEleR.push_back(make_pair(airThick,"Air"));
+
+				unsigned Nmodule=4;
+				for(unsigned i=0; i<Nmodule; i++) {
+					m_caloStruct.push_back( SamplingSection(iEleL) );
+					m_caloStruct.push_back( SamplingSection(iEleR) );
+				}
+
+				Nmodule=5;
+				iEleL[2].first = 2.8*mm;
+				iEleR[0].first = 1.2*mm;
+				iEleR[2].first = 1.2*mm;
+				for(unsigned i=0; i<Nmodule; i++) {
+					m_caloStruct.push_back( SamplingSection(iEleL) );
+					m_caloStruct.push_back( SamplingSection(iEleR) );
+				}
+
+				Nmodule=4;
+				iEleL[2].first = 4.2*mm;
+				iEleR[0].first = 2.2*mm;
+				iEleR[2].first = 2.2*mm;
+				for(unsigned i=0; i<Nmodule; i++) {
+					m_caloStruct.push_back( SamplingSection(iEleL) );
+					m_caloStruct.push_back( SamplingSection(iEleR) );
+				}
+		}
+		else if (version_ == HGCAL_E40_TH || version_ == HGCAL_E40_T || version_ == HGCAL_E40_H || version_ == HGCAL_E40 || version_ == DUMMY ){
+			G4double airThick = 2*mm,
+					pcbThick = 2*mm,
+					wThick = 2.5*mm,
+					wcuThick = 0.6*mm;
+
+			iEleL.clear();
+			iEleL.push_back(make_pair(0.5*mm,"Cu"));
+			iEleL.push_back(make_pair(0.5*mm,"CFMix"));
+			iEleL.push_back(make_pair(wThick,"W"));
+			iEleL.push_back(make_pair(0.5*mm,"CFMix"));
+			iEleL.push_back(make_pair(0.5*mm,"Cu"));
+			iEleL.push_back(make_pair(airThick,"Air"));
+			iEleL.push_back(make_pair(pcbThick,"PCB"));
+			iEleL.push_back(make_pair(0.1*mm,"Si"));
+			iEleL.push_back(make_pair(0.1*mm,"Si"));
+			iEleL.push_back(make_pair(0.1*mm,"Si"));
+
+
+			unsigned Nmodule=10;
+			for(unsigned i=0; i<Nmodule; i++) {
+				m_caloStruct.push_back( SamplingSection(iEleL) );
+			}
+			iEleL[2].first = 3.2*mm;
+			Nmodule=32;
+			for(unsigned i=0; i<Nmodule; i++) {
+				m_caloStruct.push_back( SamplingSection(iEleL) );
+			}
+		}
+
+}
 
 void DetectorConstruction::buildHCal(double steelThick){
 	std::vector<std::pair <G4double,std::string>> iEleL;
@@ -512,208 +600,10 @@ void DetectorConstruction::SetDetModel(G4int model) {
 	model_ = model;
 }
 
-void DetectorConstruction::buildECal() {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		G4VSolid *solid;
-		G4VSolid *Box;
-		int worldX = 5000;
-		int worldY = 5000;
-		int worldZ = 5000;
-		int caloZ = 0;
-		int caloOffset = 1;
-		int firstCaloPos = 0;
-		int layers = 5;
-		G4double z, amu, density;
-		density = 2.329*g/cm3;
-		amu = 28.0855*g/mole;
-		G4Material* Si = new G4Material("Silicon", z=14., amu, density);
-		G4FieldManager* pFieldMgr=0;
-		G4VSensitiveDetector* pSDetector=0;
-		G4UserLimits* pULimits=0;
-
-
-		// Define world volume
-		   Box = new G4Box( "WBox", worldX/2., worldY/2., worldZ/2. );
-		   G4LogicalVolume*   worldLV  = new G4LogicalVolume( Box, Si, "WLog", pFieldMgr, pSDetector, pULimits, true);
-		   G4VPhysicalVolume* worldVol = new G4PVPlacement(0, G4ThreeVector(), "WPhys",worldLV, 0, false, 0);
-
-				//define our solid
-				G4double a[2] = {0,5},b[2] = {0,0},c[2] = {24,24};
-				solid = new G4Polyhedra("box", 0., 2* pi, 6, 2, a, b, c);
-				G4LogicalVolume* hexagonLV = new G4LogicalVolume( solid, Si, "hexagonLV", pFieldMgr, pSDetector, pULimits, true );
-
-				 // Define one layer as one assembly volume
-				G4AssemblyVolume* assemblyDetector = new G4AssemblyVolume();
-
-				// Rotation and translation of a plate inside the assembly
-				G4RotationMatrix Ra;
-				G4ThreeVector Ta;
-				G4Transform3D Tr;
-
-				// Rotation of the assembly inside the world
-				G4RotationMatrix Rm;
-
-				 // Fill the assembly by the hexagons
-
-				Ta.setX( 18. ); Ta.setY( -1*6*1.73 ); Ta.setZ( 0. );
-				Tr = G4Transform3D(Ra,Ta);
-				assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
-
-				Ta.setX( -18. ); Ta.setY( -1*6*1.73 ); Ta.setZ( 0. );
-				Tr = G4Transform3D(Ra,Ta);
-				assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
-
-				Ta.setX( -18. ); Ta.setY( 6*1.73 ); Ta.setZ( 0. );
-				Tr = G4Transform3D(Ra,Ta);
-				assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
-
-				Ta.setX( 18. ); Ta.setY( 6*1.73 ); Ta.setZ( 0. );
-				Tr = G4Transform3D(Ra,Ta);
-				assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
-
-				Ta.setX( 0. ); Ta.setY( 12. ); Ta.setZ( 0. );
-				Tr = G4Transform3D(Ra,Ta);
-				assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
-
-				Ta.setX( 0. ); Ta.setY( -1*12. ); Ta.setZ( 0. );
-				Tr = G4Transform3D(Ra,Ta);
-				assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
-
-				Ta.setX( 0. ); Ta.setY( 0. ); Ta.setZ( 0. );
-				Tr = G4Transform3D(Ra,Ta);
-				assemblyDetector->AddPlacedVolume( hexagonLV, Tr );
-
-				   // Now instantiate the layers
-				   for( unsigned int i = 0; i < layers; i++ )
-				   {
-				     // Translation of the assembly inside the world
-				     G4ThreeVector Tm( 0,0,i*(caloZ + caloOffset) - firstCaloPos );
-				     Tr = G4Transform3D(Rm,Tm);
-				     assemblyDetector->MakeImprint( worldLV, Tr, 0, false );
-				   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		std::vector<std::pair <G4double,std::string>> iEleL,iEleR;
-		initLayer(1);
-		if (version_ == HGCAL_E26_TH || version_ == HGCAL_E26_T || version_ == HGCAL_E26_H || version_ == HGCAL_E26){
-			G4double airThick = 2*mm,
-					pcbThick = 2*mm,
-					wThick = 2.*mm,
-					wcuThick = 0.6*mm;
-
-			iEleL.clear();
-			iEleL.push_back(make_pair(0.5*mm,"Cu"));
-			iEleL.push_back(make_pair(0.5*mm,"CFMix"));
-			iEleL.push_back(make_pair(wThick,"W"));
-
-			iEleL.push_back(make_pair(0.5*mm,"CFMix"));
-			iEleL.push_back(make_pair(0.5*mm,"Cu"));
-			iEleL.push_back(make_pair(airThick,"Air"));
-			iEleL.push_back(make_pair(pcbThick,"PCB"));
-			iEleL.push_back(make_pair(0.1*mm,"Si"));
-			iEleL.push_back(make_pair(0.1*mm,"Si"));
-			iEleL.push_back(make_pair(0.1*mm,"Si"));
-
-			std::vector<std::pair <G4double,std::string>> iEleR;
-			iEleR.push_back(make_pair(wcuThick,"WCu"));
-			iEleR.push_back(make_pair(6*mm,"Cu"));
-			iEleR.push_back(make_pair(wcuThick,"WCu"));
-			iEleR.push_back(make_pair(0.1*mm,"Si"));
-			iEleR.push_back(make_pair(0.1*mm,"Si"));
-			iEleR.push_back(make_pair(0.1*mm,"Si"));
-			iEleR.push_back(make_pair(pcbThick,"PCB"));
-			iEleR.push_back(make_pair(airThick,"Air"));
-
-				unsigned Nmodule=4;
-				for(unsigned i=0; i<Nmodule; i++) {
-					m_caloStruct.push_back( SamplingSection(iEleL) );
-					m_caloStruct.push_back( SamplingSection(iEleR) );
-				}
-
-				Nmodule=5;
-				iEleL[2].first = 2.8*mm;
-				iEleR[0].first = 1.2*mm;
-				iEleR[2].first = 1.2*mm;
-				for(unsigned i=0; i<Nmodule; i++) {
-					m_caloStruct.push_back( SamplingSection(iEleL) );
-					m_caloStruct.push_back( SamplingSection(iEleR) );
-				}
-
-				Nmodule=4;
-				iEleL[2].first = 4.2*mm;
-				iEleR[0].first = 2.2*mm;
-				iEleR[2].first = 2.2*mm;
-				for(unsigned i=0; i<Nmodule; i++) {
-					m_caloStruct.push_back( SamplingSection(iEleL) );
-					m_caloStruct.push_back( SamplingSection(iEleR) );
-				}
-		}
-		else if (version_ == HGCAL_E40_TH || version_ == HGCAL_E40_T || version_ == HGCAL_E40_H || version_ == HGCAL_E40 || version_ == DUMMY ){
-			G4double airThick = 2*mm,
-					pcbThick = 2*mm,
-					wThick = 2.5*mm,
-					wcuThick = 0.6*mm;
-
-			iEleL.clear();
-			iEleL.push_back(make_pair(0.5*mm,"Cu"));
-			iEleL.push_back(make_pair(0.5*mm,"CFMix"));
-			iEleL.push_back(make_pair(wThick,"W"));
-			iEleL.push_back(make_pair(0.5*mm,"CFMix"));
-			iEleL.push_back(make_pair(0.5*mm,"Cu"));
-			iEleL.push_back(make_pair(airThick,"Air"));
-			iEleL.push_back(make_pair(pcbThick,"PCB"));
-			iEleL.push_back(make_pair(0.1*mm,"Si"));
-			iEleL.push_back(make_pair(0.1*mm,"Si"));
-			iEleL.push_back(make_pair(0.1*mm,"Si"));
-
-
-			unsigned Nmodule=10;
-			for(unsigned i=0; i<Nmodule; i++) {
-				m_caloStruct.push_back( SamplingSection(iEleL) );
-			}
-			iEleL[2].first = 3.2*mm;
-			Nmodule=32;
-			for(unsigned i=0; i<Nmodule; i++) {
-				m_caloStruct.push_back( SamplingSection(iEleL) );
-			}
-		}
-
-}
-
 G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 		G4double thick, G4double zpos, const G4double & minL,
 		const G4double & width, size_t which_ele) {
+
 	G4VSolid *solid;
 	G4VSolid *Box;
 
