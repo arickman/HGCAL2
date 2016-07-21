@@ -723,10 +723,13 @@ void DetectorConstruction::SetDetModel(G4int model) {
 	model_ = model;
 }
 
- /* G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
+  G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
 		G4double thick, G4double zpos, const G4double & minL,
 		const G4double & width, size_t which_ele) {
-
+	  G4VSolid *solid;
+	  return solid;
+  }
+/*
 	G4VSolid *solid;
 	G4VSolid *Box;
 
