@@ -36,7 +36,7 @@ DetectorConstruction::DetectorConstruction(G4int ver, G4int mod, double steelThi
 
 		G4cout << "[DetectorConstruction] starting v_HGCALSYM_v1" << G4endl;
 		buildTracker();
-		//buildECal();
+		buildECal();
 		buildHCal(steelThick);
 		//Add the target
 
@@ -45,7 +45,7 @@ DetectorConstruction::DetectorConstruction(G4int ver, G4int mod, double steelThi
 	DefineMaterials();
 	SetMagField(0);
 	m_detectorMessenger = new DetectorMessenger(this);
-	UpdateCalorSize();
+	//UpdateCalorSize();
 }
 void DetectorConstruction::buildTracker(){
 
