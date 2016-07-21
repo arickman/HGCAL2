@@ -95,7 +95,7 @@ void DetectorConstruction::buildECal(){
 
 		std::vector<std::pair <G4double,std::string>> iEleL,iEleR;
 		initLayer(1);
-		/*if (version_ == HGCAL_E26_TH || version_ == HGCAL_E26_T || version_ == HGCAL_E26_H || version_ == HGCAL_E26){
+		if (version_ == HGCAL_E26_TH || version_ == HGCAL_E26_T || version_ == HGCAL_E26_H || version_ == HGCAL_E26){
 			G4double airThick = 2*mm,
 					pcbThick = 2*mm,
 					wThick = 2.*mm,
@@ -177,10 +177,10 @@ void DetectorConstruction::buildECal(){
 				m_caloStruct.push_back( SamplingSection(iEleL) );
 			}
 		}
-*/
+
 }
 void DetectorConstruction::buildHCal(double steelThick){
-	std::vector<std::pair <G4double,std::string>> iEleL;
+	/*std::vector<std::pair <G4double,std::string>> iEleL;
 
 	if (version_ == H){
 		iEleL.push_back(make_pair(80*cm,"G4_Galactic"));
@@ -202,7 +202,7 @@ void DetectorConstruction::buildHCal(double steelThick){
 		for(unsigned i=0; i<Nmodule; i++) {
 			m_caloStruct.push_back( SamplingSection(iEleL) );
 		}
-	}
+	}*/
 }
 DetectorConstruction::~DetectorConstruction() {
 	delete m_detectorMessenger;
