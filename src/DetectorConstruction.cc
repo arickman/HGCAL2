@@ -601,9 +601,13 @@ void DetectorConstruction::SetDetModel(G4int model) {
 	model_ = model;
 }
 
-  G4AssemblyVolume *DetectorConstruction::constructSolid(std::string baseName,
-		G4double thick, G4double zpos, const G4double & minL,
-		const G4double & width, size_t which_ele) {
+  //G4AssemblyVolume *DetectorConstruction::constructSolid(std::string baseName,
+	//	G4double thick, G4double zpos, const G4double & minL,
+		//const G4double & width, size_t which_ele) {
+
+	  G4VSolid *DetectorConstruction::constructSolid(std::string baseName,
+	 		G4double thick, G4double zpos, const G4double & minL,
+	 		const G4double & width, size_t which_ele) {
 
 
 	/*if (which_ele == 0) {
@@ -710,4 +714,5 @@ void DetectorConstruction::SetDetModel(G4int model) {
 
 	//}
 	return assemblyDetector;
+	//return solid;
 }
