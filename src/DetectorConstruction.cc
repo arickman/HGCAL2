@@ -713,6 +713,6 @@ void DetectorConstruction::SetDetModel(G4int model) {
 
 
 	//}
-	return assemblyDetector;
-	//return solid;
+	//return assemblyDetector;
+	return solid;
 }
