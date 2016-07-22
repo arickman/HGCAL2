@@ -152,7 +152,7 @@ private:
 	void fillInterSectorSpace(const unsigned sectorNum, const G4double & minL,
 			const G4double & width);
 
-	G4VSolid *constructSolid(std::string baseName, G4double thick,
+	G4AssemblyVolume *constructSolid(std::string baseName, G4double thick,
 			G4double zpos, const G4double & minL, const G4double & width,
 			const size_t which_ele);
 
