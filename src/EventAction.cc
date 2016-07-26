@@ -150,7 +150,7 @@ void EventAction::EndOfEventAction(const G4Event* g4evt) {
 		if (count == 4)
 			//seed_y = 1230840779;
 			seed_y = std::atoi(currentLine.c_str());
-		g4cout<< "the seed I am putting in is:" <<seed_y<<g4endl;
+		cout<< "the seed I am putting in is:" <<seed_y<<endl;
 		//}
 		TVector3 status(stat_x,stat_y,0);
 		TVector3 seeds(seed_x,seed_y,0);
