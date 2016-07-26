@@ -133,6 +133,10 @@ void EventAction::EndOfEventAction(const G4Event* g4evt) {
 	std::ifstream input(fileN);
 	std::string currentLine;
 	//Double_t stat_x = 0,stat_y = 0,seed_x = 0,seed_y = 0;
+	Double_t stat_x;
+	Double_t stat_y;
+	Double_t seed_x;
+	Double_t seed_y;
 	for(int count = 0; count < 5; count++ ){
 		getline( input, currentLine );
 		if (count == 1)
