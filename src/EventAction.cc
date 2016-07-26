@@ -130,6 +130,7 @@ void EventAction::EndOfEventAction(const G4Event* g4evt) {
 	//if (summedDep < depCut){
 	G4String fileN = "temp.rndm";
 	CLHEP::HepRandom::saveEngineStatus(fileN);
+	CLHEP::HepRandom::showEngineStatus();
 	std::ifstream input(fileN);
 	std::string currentLine;
 	//Double_t stat_x = 0,stat_y = 0,seed_x = 0,seed_y = 0;
