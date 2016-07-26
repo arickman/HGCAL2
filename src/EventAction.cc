@@ -128,7 +128,7 @@ void EventAction::EndOfEventAction(const G4Event* g4evt) {
 	double wgtTotalSens = 0;
 
 	//if (summedDep < depCut){
-	G4String fileN = "currentEvent.rndm";
+	G4String fileN = "temp.rndm";
 	CLHEP::HepRandom::saveEngineStatus(fileN);
 	std::ifstream input(fileN);
 	std::string currentLine;
