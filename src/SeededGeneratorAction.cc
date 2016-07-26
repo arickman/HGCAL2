@@ -100,8 +100,7 @@ SeededGeneratorAction::SeededGeneratorAction(G4int mod,
 
 	G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
 	G4String particleName;
-	G4ParticleDefinition* particle = particleTable->FindParticle(particleName =
-			"e-");
+	G4ParticleDefinition* particle = particleTable->FindParticle(particleName ="e-");
 
 	particleGun->SetParticleDefinition(particle);
 	particleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
