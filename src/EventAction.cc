@@ -14,6 +14,7 @@
 #include <iomanip>
 #include "TVector3.h"
 #include "TMath.h"
+using namespace std;
 //
 EventAction::EventAction(G4bool doFast) {
 	eventMessenger = new EventActionMessenger(this);
@@ -137,16 +138,16 @@ void EventAction::EndOfEventAction(const G4Event* g4evt) {
 		if (count == 1)
 			//stat_x =  1878463799;
 			stat_x = std::atoi(currentLine.c_str());
-		g4cout<< stat_x<<g4endl;
+		cout<< stat_x<<endl;
 		if (count == 2)
 			//stat_y = 0;
 			stat_y = std::atoi(currentLine.c_str());
-		g4cout<< stat_y<<g4endl;
+		cout<< stat_y<<endl;
 
 		if (count == 3)
 			//seed_x = 1144078405;
 			seed_x = std::atoi(currentLine.c_str());
-		g4cout<< seed_x<<g4endl;
+		cout<< seed_x<<endl;
 		if (count == 4)
 			//seed_y = 1230840779;
 			seed_y = std::atoi(currentLine.c_str());
