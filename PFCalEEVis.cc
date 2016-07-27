@@ -31,6 +31,10 @@ int main(int argc, char** argv) {
 	std::cout << " -- G4VIS_USE is not set " << std::endl;
 #endif
 
+using namespace std;
+
+
+
 	// Choose the Random engine
 	CLHEP::HepRandom::setTheEngine(new CLHEP::RanecuEngine);
 	// User Verbose output class
@@ -53,9 +57,11 @@ int main(int argc, char** argv) {
 		model = atoi(argv[3]);
 	if (argc > 4)
 		signal = atoi(argv[4]);
+	cout << "the signal is: " << signal << endl;
 	int status_x,status_y,seeds_x,seeds_y;
 	if (argc > 7){
 		status_x = atoi(argv[5]);
+		cout << "status x is: " << status_x << endl;
 		status_y = atoi(argv[6]);
 		seeds_x = atoi(argv[7]);
 		seeds_y = atoi(argv[8]);
