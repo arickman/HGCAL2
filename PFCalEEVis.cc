@@ -77,6 +77,7 @@ using namespace std;
 	}
 
 	CLHEP::HepRandom::restoreEngineStatus ("temp.rndm");
+	break ;
 
 	std::cout << "-- Running version " << version << " model " << model
 			<< std::endl;
