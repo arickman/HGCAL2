@@ -86,8 +86,8 @@ void EventAction::BeginOfEventAction(const G4Event* evt) {
 	evtNb_ = evt->GetEventID();
 	if (evtNb_ % printModulo == 0) {
 		G4cout << "\n---> Begin of event: " << evtNb_ << G4endl;
-		CLHEP::HepRandom::saveEngineStatus("temp.rndm");
-		CLHEP::HepRandom::showEngineStatus();
+		//CLHEP::HepRandom::restoreEngineStatus("temp.rndm");
+		//CLHEP::HepRandom::showEngineStatus();
 	}
 
 }
@@ -130,8 +130,8 @@ void EventAction::EndOfEventAction(const G4Event* g4evt) {
 
 	//if (summedDep < depCut){
 	G4String fileN = "temp.rndm";
-	CLHEP::HepRandom::saveEngineStatus(fileN);
-	CLHEP::HepRandom::showEngineStatus();
+	//CLHEP::HepRandom::saveEngineStatus(fileN);
+	//CLHEP::HepRandom::showEngineStatus();
 	std::ifstream input(fileN);
 	std::string currentLine;
 	//Double_t stat_x = 0,stat_y = 0,seed_x = 0,seed_y = 0;
