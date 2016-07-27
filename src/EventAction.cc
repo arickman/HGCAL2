@@ -151,11 +151,11 @@ void EventAction::EndOfEventAction(const G4Event* g4evt) {
 		cout<< stat_y<<endl;
 
 		if (count == 3)
-			seed_x = 1144078405;
+			seed_x =  241346073;
 			//seed_x = std::atoi(currentLine.c_str());
 		cout<< seed_x<<endl;
 		if (count == 4)
-			seed_y = 1230840779;
+			seed_y = 584289549;
 			//seed_y = std::atoi(currentLine.c_str());
 		cout<< "the seed I am putting in is:" <<seed_y<<endl;
 		//}

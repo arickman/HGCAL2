@@ -76,7 +76,7 @@ using namespace std;
 				<< line3 << "\n" << line4;
 	}
 
-	 CLHEP::HepRandom::restoreEngineStatus ("temp.rndm");
+	 //CLHEP::HepRandom::restoreEngineStatus ("temp.rndm");
 	//CLHEP::HepRandom::saveEngineStatus ("temp.rndm");
 
 
