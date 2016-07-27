@@ -141,21 +141,21 @@ void EventAction::EndOfEventAction(const G4Event* g4evt) {
 	for(int count = 0; count < 5; count++ ){
 		getline( input, currentLine );
 		if (count == 1)
-			//stat_x =  1878463799;
-			stat_x = std::atoi(currentLine.c_str());
+			stat_x =  1878463799;
+			//stat_x = std::atoi(currentLine.c_str());
 		cout<< stat_x<<endl;
 		if (count == 2)
-			//stat_y = 0;
-			stat_y = std::atoi(currentLine.c_str());
+			stat_y = 0;
+			//stat_y = std::atoi(currentLine.c_str());
 		cout<< stat_y<<endl;
 
 		if (count == 3)
-			//seed_x = 1144078405;
-			seed_x = std::atoi(currentLine.c_str());
+			seed_x = 1144078405;
+			//seed_x = std::atoi(currentLine.c_str());
 		cout<< seed_x<<endl;
 		if (count == 4)
-			//seed_y = 1230840779;
-			seed_y = std::atoi(currentLine.c_str());
+			seed_y = 1230840779;
+			//seed_y = std::atoi(currentLine.c_str());
 		cout<< "the seed I am putting in is:" <<seed_y<<endl;
 		//}
 		TVector3 status(stat_x,stat_y,0);
