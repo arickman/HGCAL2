@@ -3,6 +3,7 @@
 #include "EventActionMessenger.hh"
 #include "DetectorConstruction.hh"
 #include "StackingAction.hh"
+#include <iostream>
 
 #include "HGCSSInfo.hh"
 
@@ -144,6 +145,7 @@ void EventAction::EndOfEventAction(const G4Event* g4evt) {
 		if (count == 1)
 			//stat_x =  1878463799;
 			stat_x = std::atoi(currentLine.c_str());
+		cout << "the current line is: "<<currentLine.c_str()<<endl;
 		cout<< stat_x<<endl;
 		if (count == 2)
 			//stat_y = 0;
