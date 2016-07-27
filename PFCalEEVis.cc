@@ -100,7 +100,8 @@ using namespace std;
         /*}
         else {
             runManager->SetUserAction(new PrimaryGeneratorAction(model, signal, data));
-       */ }
+        }
+        */
 
 
         runManager->Initialize();
