@@ -95,12 +95,14 @@ using namespace std;
 	runManager->SetUserAction(new SteppingAction(data));
 	runManager->SetUserAction(new StackingAction(data));
 
-        if (data!="") {
+        //if (data!="") {
             runManager->SetUserAction(new SeededGeneratorAction(model, data));
-        }
+        /*}
         else {
             runManager->SetUserAction(new PrimaryGeneratorAction(model, signal, data));
-        }
+       */ }
+
+
         runManager->Initialize();
 
 	// Initialize visualization
