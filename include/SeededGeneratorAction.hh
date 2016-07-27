@@ -54,8 +54,7 @@ class TTree;
 
 class SeededGeneratorAction: public G4VUserPrimaryGeneratorAction {
 public:
-	SeededGeneratorAction(G4int mod = 0,
-			std::string data = "");
+	SeededGeneratorAction(G4int mod = 0,std::string data = "");
 	virtual ~SeededGeneratorAction();
 
 	void GeneratePrimaries(G4Event*);

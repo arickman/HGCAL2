@@ -38,6 +38,7 @@
 #include "StackingAction.hh"
 
 #include "G4RunManager.hh"
+#include "G4UImanager.hh"
 #include "G4Event.hh"
 #include "G4ParticleGun.hh"
 #include "G4ParticleTable.hh"
@@ -59,8 +60,7 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 
-SeededGeneratorAction::SeededGeneratorAction(G4int mod,
-		std::string data) {
+SeededGeneratorAction::SeededGeneratorAction(G4int mod, std::string data) {
 	model_ = mod;
 	data_ = data;
 	G4int n_particle = 1;
