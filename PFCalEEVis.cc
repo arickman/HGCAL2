@@ -96,7 +96,6 @@ using namespace std;
 	runManager->SetUserAction(new StackingAction(data));
 
         //if (data!="") {
-	std::string data = "";
     runManager->SetUserAction(new SeededGeneratorAction(model, data));
         /*}
         else {
