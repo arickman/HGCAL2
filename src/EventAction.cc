@@ -86,7 +86,7 @@ void EventAction::BeginOfEventAction(const G4Event* evt) {
 	evtNb_ = evt->GetEventID();
 	if (evtNb_ % printModulo == 0) {
 		G4cout << "\n---> Begin of event: " << evtNb_ << G4endl;
-		CLHEP::HepRandom::saveEngineStatus("temp.rndm");
+		//CLHEP::HepRandom::saveEngineStatus("temp.rndm");
 		CLHEP::HepRandom::showEngineStatus();
 	}
 
