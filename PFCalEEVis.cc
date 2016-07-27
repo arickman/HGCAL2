@@ -36,7 +36,7 @@ using namespace std;
 
 
 	// Choose the engine
-	//CLHEP::HepRandom::setTheEngine(new CLHEP::RanecuEngine);
+	CLHEP::HepRandom::setTheEngine(new CLHEP::RanecuEngine);
 	// User Verbose output class
 	G4VSteppingVerbose::SetInstance(new SteppingVerbose);
 
@@ -76,7 +76,7 @@ using namespace std;
 				<< line3 << "\n" << line4;
 	}
 
-	 //CLHEP::HepRandom::restoreEngineStatus ("temp.rndm");
+	 CLHEP::HepRandom::restoreEngineStatus ("temp.rndm");
 	//CLHEP::HepRandom::saveEngineStatus ("temp.rndm");
 
 
@@ -96,12 +96,9 @@ using namespace std;
 	runManager->SetUserAction(new SteppingAction(data));
 	runManager->SetUserAction(new StackingAction(data));
 
-        if (data!="") {
-            runManager->SetUserAction(new SeededGeneratorAction(model, data));
-        }
-        else {
-            runManager->SetUserAction(new PrimaryGeneratorAction(model, signal, data));
-        }
+
+        runManager->SetUserAction(new SeededGeneratorAction(model, data));
+
         runManager->Initialize();
 
 	// Initialize visualization

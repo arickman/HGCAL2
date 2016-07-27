@@ -8,6 +8,9 @@
 #include "DetectorConstruction.hh"
 
 #include "HGCSSGenParticle.hh"
+#include <iostream>
+
+using namespace std;
 
 //
 SteppingAction::SteppingAction(std::string data) {
@@ -22,7 +25,6 @@ SteppingAction::SteppingAction(std::string data) {
 			(DetectorConstruction*) G4RunManager::GetRunManager()->GetUserDetectorConstruction();
 	zOff = -0.5 * (Detector->GetCalorSizeZ());
 	secondPass = (data == "") ? false : true;
-
 
 }
 
@@ -42,6 +44,10 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep) {
 	G4int pdgID = lTrack->GetDefinition()->GetPDGEncoding();
 
 	G4VPhysicalVolume* volume = thePreStepPoint->GetPhysicalVolume();
+
+
+
+	cout <<"the kinetic energy is :" << kinEng << "and the PDGID is:" << pdgID << endl;
 
 
 
