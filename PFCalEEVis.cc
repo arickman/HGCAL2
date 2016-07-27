@@ -63,8 +63,11 @@ using namespace std;
 		status_x = atoi(argv[5]);
 		cout << "status x is: " << status_x << endl;
 		status_y = atoi(argv[6]);
+		cout << "the status y is: " << status_y << endl;
 		seeds_x = atoi(argv[7]);
+		cout << "the seed x is: " << seeds_x << endl;
 		seeds_y = atoi(argv[8]);
+		cout << "the seed y is: " << seeds_y << endl;
 
 		ofstream outputFile("temp.rndm");
 		Int_t line1 = status_x, line2 = status_y,
