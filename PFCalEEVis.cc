@@ -77,7 +77,6 @@ using namespace std;
 	}
 
 	 CLHEP::HepRandom::restoreEngineStatus ("temp.rndm");
-	//CLHEP::HepRandom::saveEngineStatus ("temp.rndm");
 
 
 	std::cout << "-- Running version " << version << " model " << model
@@ -96,9 +95,12 @@ using namespace std;
 	runManager->SetUserAction(new SteppingAction(data));
 	runManager->SetUserAction(new StackingAction(data));
 
-
-        runManager->SetUserAction(new SeededGeneratorAction(model, data));
-
+        if (data!="") {
+            runManager->SetUserAction(new SeededGeneratorAction(model, data));
+        }
+        else {
+            runManager->SetUserAction(new PrimaryGeneratorAction(model, signal, data));
+        }
         runManager->Initialize();
 
 	// Initialize visualization
