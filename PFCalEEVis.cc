@@ -35,8 +35,8 @@ using namespace std;
 
 
 
-	// Choose the Random engine
-	CLHEP::HepRandom::setTheEngine(new CLHEP::RanecuEngine);
+	// Choose the engine
+	//CLHEP::HepRandom::setTheEngine(new CLHEP::RanecuEngine);
 	// User Verbose output class
 	G4VSteppingVerbose::SetInstance(new SteppingVerbose);
 
