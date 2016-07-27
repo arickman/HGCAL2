@@ -136,6 +136,7 @@ void SeededGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
 	tree_->GetEntry(currentEvt);
 	G4double et = 0.0;
 	//CLHEP::HepRandom::restoreEngineStatus ("temp.rndm");
+	CLHEP::HepRandom::saveEngineStatus ("temp.rndm");
 	if (inc_->size() != 0){
 		for(int i = 0; i < inc_->size(); i++){
 			HGCSSGenParticle& incPart = (*inc_)[i];
