@@ -56,7 +56,8 @@
 #include <string>
 #include <sstream>
 #define PI 3.1415926535
-
+#include <iostream>
+using namespace std;
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 
@@ -65,6 +66,7 @@ SeededGeneratorAction::SeededGeneratorAction(G4int mod, std::string data) {
 	data_ = data;
 	G4int n_particle = 1;
 	evt_ = 0; inc_ = 0;
+	cout << "hello" << endl;
 	file_ = TFile::Open(data.c_str());
 	tree_  = (TTree*) file_->Get("HGCSSTree");
 	tree_->SetBranchAddress("HGCSSIncAction",&inc_);
