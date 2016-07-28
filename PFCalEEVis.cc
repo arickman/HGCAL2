@@ -61,8 +61,8 @@ using namespace std;
 	cout << "the signal is: " << signal << endl;
 	int status_x,status_y,seeds_x,seeds_y;
 	if (argc > 8){
-		data = atoi(argv[5]);
-		cout << "the data is :" << atoi(argv[5]) << endl;
+		data = argv[5];
+		cout << "the data is :" << data << endl;
 		status_x = atoi(argv[6]);
 		cout << "status x is: " << status_x << endl;
 		status_y = atoi(argv[7]);
