@@ -54,7 +54,7 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep) {
 
 
 
-	cout <<"the kinetic energy is :" << stepKE << "and the PDGID is:" << pdgID << endl;
+	cout <<"the kinetic energy is :" << kinEng - aStep->GetDeltaEnergy() << " and the PDGID is:" << pdgID << endl;
 
 
 
