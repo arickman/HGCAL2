@@ -50,7 +50,7 @@ using namespace std;
 	int model = DetectorConstruction::m_FULLSECTION;
 
 	bool signal = true;
-	std::string data = "";
+	std::string data = 1; //changed from empty for test
 	double steelThick= 0;
 	if (argc > 2)
 		version = atoi(argv[2]);
