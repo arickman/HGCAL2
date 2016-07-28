@@ -67,11 +67,13 @@ SeededGeneratorAction::SeededGeneratorAction(G4int mod, std::string data) {
 	data_ = data;
 	G4int n_particle = 1;
 	evt_ = 0; inc_ = 0;
-	data = "PFcal.root";
+	/*
+	data = "PFcal.root"; //test
 	file_ = TFile::Open(data.c_str());
 	tree_  = (TTree*) file_->Get("HGCSSTree");
 	tree_->SetBranchAddress("HGCSSIncAction",&inc_);
 	tree_->SetBranchAddress("HGCSSEvent",&evt_);
+	*/
 
 	eventAction_ =
 			(EventAction*) G4RunManager::GetRunManager()->GetUserEventAction();
@@ -136,7 +138,7 @@ void SeededGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
 			"e-");
 	particleGun->SetParticleDefinition(particle);
 	int currentEvt = anEvent->GetEventID();
-	tree_->GetEntry(currentEvt);
+	//tree_->GetEntry(currentEvt);
 	G4double et = 0.0;
 	CLHEP::HepRandom::restoreEngineStatus ("temp.rndm");
 	if (inc_->size() != 0){
