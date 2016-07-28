@@ -133,10 +133,9 @@ void SeededGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
 	G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
 	G4String particleName;
 
-	G4ParticleDefinition* particle = particleTable->FindParticle(particleName =
-			"e-");
+	G4ParticleDefinition* particle = particleTable->FindParticle(particleName = "e-");
 	particleGun->SetParticleDefinition(particle);
-	//int currentEvt = anEvent->GetEventID();
+	int currentEvt = anEvent->GetEventID();
 	//tree_->GetEntry(currentEvt);
 	G4double et = 0.0;
 	CLHEP::HepRandom::restoreEngineStatus ("temp.rndm");
@@ -155,6 +154,9 @@ void SeededGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
 		eventAction_->SetWait(false);
 	//}
 */
+
+	eventAction_->SetWait(false);
+
 
 	particleGun->SetParticleEnergy(et * GeV);
 	particleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
