@@ -50,7 +50,7 @@ using namespace std;
 	int model = DetectorConstruction::m_FULLSECTION;
 
 	bool signal = true;
-	//std::string data = "";
+	std::string data;
 	double steelThick= 0;
 	if (argc > 2)
 		version = atoi(argv[2]);
@@ -61,7 +61,7 @@ using namespace std;
 	cout << "the signal is: " << signal << endl;
 	int status_x,status_y,seeds_x,seeds_y;
 	if (argc > 8){
-		std::string data = atoi(argv[5]);
+		data = atoi(argv[5]);
 		cout << "the data is :" << data << endl;
 		status_x = atoi(argv[6]);
 		cout << "status x is: " << status_x << endl;
