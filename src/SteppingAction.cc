@@ -21,8 +21,7 @@ SteppingAction::SteppingAction(std::string data) {
 	saturationEngine = new G4EmSaturation();
 	version_ = ((DetectorConstruction*) G4RunManager::GetRunManager()->GetUserDetectorConstruction())->getVersion();
 
-	DetectorConstruction*  Detector =
-			(DetectorConstruction*) G4RunManager::GetRunManager()->GetUserDetectorConstruction();
+	DetectorConstruction*  Detector = (DetectorConstruction*) G4RunManager::GetRunManager()->GetUserDetectorConstruction();
 	zOff = -0.5 * (Detector->GetCalorSizeZ());
 	secondPass = (data == "") ? false : true;
 
