@@ -69,8 +69,8 @@ SeededGeneratorAction::SeededGeneratorAction(G4int mod, std::string data) {
 	evt_ = 0; inc_ = 0;
 
 	//data = "PFcal.root"; //test
-
-	file_ = TFile::Open(data.c_str());
+	file_ = TFile::Open("PFcal.root", "RECREATE");
+	//file_ = TFile::Open(data.c_str());
 	tree_  = (TTree*) file_->Get("HGCSSTree");
 	tree_->SetBranchAddress("HGCSSIncAction",&inc_);
 	tree_->SetBranchAddress("HGCSSEvent",&evt_);
