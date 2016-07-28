@@ -87,7 +87,6 @@ void EventAction::BeginOfEventAction(const G4Event* evt) {
 	evtNb_ = evt->GetEventID();
 	if (evtNb_ % printModulo == 0) {
 		G4cout << "\n---> Begin of event: " << evtNb_ << G4endl;
-		CLHEP::HepRandom::restoreEngineStatus("temp.rndm");
 		CLHEP::HepRandom::showEngineStatus();
 	}
 
@@ -130,9 +129,8 @@ void EventAction::EndOfEventAction(const G4Event* g4evt) {
 	double wgtTotalSens = 0;
 
 	//if (summedDep < depCut){
-	G4String fileN = "temp.rndm";
+	G4String fileN = "currentEvent.rndm";
 	CLHEP::HepRandom::saveEngineStatus(fileN);
-	CLHEP::HepRandom::showEngineStatus();
 	std::ifstream input(fileN);
 	std::string currentLine;
 	//Double_t stat_x = 0,stat_y = 0,seed_x = 0,seed_y = 0;
@@ -144,21 +142,21 @@ void EventAction::EndOfEventAction(const G4Event* g4evt) {
 		getline( input, currentLine );
 		if (count == 1){
 			stat_x = std::atoi(currentLine.c_str());
-			cout << "the current line is: "<<currentLine.c_str()<<endl;
-			cout<< stat_x<<endl;
+			//cout << "the current line is: "<<currentLine.c_str()<<endl;
+			//cout<< stat_x<<endl;
 		}
 		if (count == 2){
 			stat_y = std::atoi(currentLine.c_str());
-			cout<< stat_y<<endl;
+			//cout<< stat_y<<endl;
 		}
 
 		if (count == 3){
 			seed_x = std::atoi(currentLine.c_str());
-			cout<< seed_x<<endl;
+			//cout<< seed_x<<endl;
 		}
 		if (count == 4){
 			seed_y = std::atoi(currentLine.c_str());
-			cout<< "the seed I am putting in is:" <<seed_y<<endl;
+			//cout<< "the seed I am putting in is:" <<seed_y<<endl;
 		}
 	//}
 		TVector3 status(stat_x,stat_y,0);
