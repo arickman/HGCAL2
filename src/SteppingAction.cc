@@ -46,15 +46,17 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep) {
 	G4VPhysicalVolume* volume = thePreStepPoint->GetPhysicalVolume();
 
 
-
-	cout <<"the kinetic energy is :" << kinEng << "and the PDGID is:" << pdgID << endl;
-
-
-
 	G4double eRawDep = aStep->GetTotalEnergyDeposit();
 
 	stepPDGID = pdgID;
 	stepKE = kinEng - aStep->GetDeltaEnergy();
+
+
+
+
+	cout <<"the kinetic energy is :" << stepKE << "and the PDGID is:" << pdgID << endl;
+
+
 
 	const G4ThreeVector & position = thePreStepPoint->GetPosition();
 	HGCSSGenParticle genPart;
