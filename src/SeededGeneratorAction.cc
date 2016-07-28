@@ -63,6 +63,7 @@ using namespace std;
 
 
 SeededGeneratorAction::SeededGeneratorAction(G4int mod, std::string data) {
+	CLHEP::HepRandom::restoreEngineStatus ("temp.rndm");
 	model_ = mod;
 	data_ = data;
 	G4int n_particle = 1;
