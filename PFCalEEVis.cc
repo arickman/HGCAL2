@@ -50,7 +50,7 @@ using namespace std;
 	int model = DetectorConstruction::m_FULLSECTION;
 
 	bool signal = true;
-	std::string data;
+	std::string data = "";
 	double steelThick= 0;
 	if (argc > 2)
 		version = atoi(argv[2]);
@@ -60,16 +60,14 @@ using namespace std;
 		signal = atoi(argv[4]);
 	cout << "the signal is: " << signal << endl;
 	int status_x,status_y,seeds_x,seeds_y;
-	if (argc > 8){
-		data = argv[5];
-		cout << "the data is :" << data << endl;
-		status_x = atoi(argv[6]);
+	if (argc > 7){
+		status_x = atoi(argv[5]);
 		cout << "status x is: " << status_x << endl;
-		status_y = atoi(argv[7]);
+		status_y = atoi(argv[6]);
 		cout << "the status y is: " << status_y << endl;
-		seeds_x = atoi(argv[8]);
+		seeds_x = atoi(argv[7]);
 		cout << "the seed x is: " << seeds_x << endl;
-		seeds_y = atoi(argv[9]);
+		seeds_y = atoi(argv[8]);
 		cout << "the seed y is: " << seeds_y << endl;
 
 		ofstream outputFile("temp.rndm");
