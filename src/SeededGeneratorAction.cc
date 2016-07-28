@@ -45,6 +45,7 @@
 #include "G4ParticleDefinition.hh"
 #include "G4SystemOfUnits.hh"
 #include "Randomize.hh"
+#include "globals.hh"
 
 #include "HepMCG4AsciiReader.hh"
 #include "HepMCG4PythiaInterface.hh"
