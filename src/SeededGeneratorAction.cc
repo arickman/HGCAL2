@@ -66,9 +66,7 @@ SeededGeneratorAction::SeededGeneratorAction(G4int mod, std::string data) {
 	data_ = data;
 	G4int n_particle = 1;
 	evt_ = 0; inc_ = 0;
-	cout << "hello" << endl;
 	file_ = TFile::Open(data.c_str());
-	cout << "hello" << endl;
 	tree_  = (TTree*) file_->Get("HGCSSTree");
 	tree_->SetBranchAddress("HGCSSIncAction",&inc_);
 	tree_->SetBranchAddress("HGCSSEvent",&evt_);
