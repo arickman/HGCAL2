@@ -51,8 +51,8 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep) {
 	stepKE = kinEng - aStep->GetDeltaEnergy();
 
 
-	if (kinEng > 1){
-	//cout <<"the kinetic energy is :" << kinEng - aStep->GetDeltaEnergy() << " and the PDGID is:" << pdgID << endl;
+	if (pdgID != 11 && pdgID != 22){
+	cout <<"the kinetic energy is :" << kinEng - aStep->GetDeltaEnergy() << " and the PDGID is:" << pdgID << endl;
 	}
 
 
