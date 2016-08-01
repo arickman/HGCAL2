@@ -17,6 +17,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with DBSCAN. If not, see 
+
 // <http://www.gnu.org/licenses/>.
 //=======================================================================
 
@@ -42,6 +43,7 @@ void DBSCAN::Run(float eps, uint minPts, float coverageBound)
 	{
 		if(m_visited[i])
 			continue;
+
 
 		m_visited[i] = true;
 
