@@ -24,7 +24,6 @@ SteppingAction::SteppingAction(std::string data) {
 	DetectorConstruction*  Detector = (DetectorConstruction*) G4RunManager::GetRunManager()->GetUserDetectorConstruction();
 	zOff = -0.5 * (Detector->GetCalorSizeZ());
 	secondPass = (data == "") ? false : true;
-
 }
 
 //
